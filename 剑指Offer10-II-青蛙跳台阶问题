@@ -1,0 +1,13 @@
+public class Solution {
+    public int NumWays(int n) {
+        int num=1;
+        int numMinusTwo = 1;
+        int numMinusOne = 1;
+        for(int i=2;i<=n;i++){
+            num=(numMinusOne+numMinusTwo)%1000000007;
+            numMinusTwo=numMinusOne;
+            numMinusOne=num;
+        }
+        return num;
+    }
+}
