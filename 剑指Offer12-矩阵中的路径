@@ -1,0 +1,35 @@
+public class Solution {
+    public bool Exist(char[][] board, string word) {
+        int rows=board.Length;
+        int cols=board[0].Length;
+        bool[,] visited=new bool[rows,cols];
+        for(int row=0;row<rows;row++){
+            for(int col=0;col<cols;col++){
+                if(hasRoute(board,visited,0,word,row,col,rows,cols)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public bool hasRoute(char[][] board,bool[,] visited,int wordLen,string word,int row,
+        int col,int rows,int cols){
+            if(wordLen>=word.Length){
+                return true;
+            }
+            bool hasValue=false;
+            if(row>=0 && row<rows && col>=0 && col<cols && board[row][col]==word[wordLen] && !visited[row,col]){
+                visited[row,col]=true;
+                hasValue=(hasRoute(board,visited,wordLen+1,word,row+1,col,rows,cols)||
+                    hasRoute(board,visited,wordLen+1,word,row-1,col,rows,cols)||
+                    hasRoute(board,visited,wordLen+1,word,row,col+1,rows,cols)||
+                    hasRoute(board,visited,wordLen+1,word,row,col-1,rows,cols)
+                );
+                if(!hasValue){
+                    visited[row,col]=false;
+                }
+            }
+            return hasValue;
+    }
+}
