@@ -1,0 +1,16 @@
+public class Solution {
+    public ListNode GetKthFromEnd(ListNode head, int k) {
+        ListNode pre=head;
+        while(k>1){
+            if(pre.next==null) return null;
+            pre=pre.next;
+            k--;
+        }
+        ListNode lastK=head;
+        while(pre.next!=null){
+            pre=pre.next;
+            lastK=lastK.next;
+        }
+        return lastK;
+    }
+}
