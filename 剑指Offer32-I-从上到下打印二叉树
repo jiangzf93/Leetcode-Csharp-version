@@ -1,0 +1,17 @@
+public class Solution {
+    public int[] LevelOrder(TreeNode root) {
+        if(root==null) return new int[0];
+        Queue<TreeNode> treeQueue=new Queue<TreeNode>();
+        treeQueue.Enqueue(root);
+        List<int> result=new List<int>();
+        int count=0;
+        while(treeQueue.Count>0){
+            TreeNode head=treeQueue.Dequeue();
+            result.Add(head.val);
+            count++;
+            if(head.left!=null) treeQueue.Enqueue(head.left);
+            if(head.right!=null) treeQueue.Enqueue(head.right);
+        }
+        return result.ToArray();
+    }
+}
