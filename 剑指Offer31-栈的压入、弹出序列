@@ -1,0 +1,21 @@
+public class Solution {
+    public bool ValidateStackSequences(int[] pushed, int[] popped) {
+        int[] popList=new int[popped.Length];
+        int listPosition=-1;
+        int pushPosition=0;
+        for(int i=0;i<popped.Length;i++){
+            if(listPosition>=0&&popList[listPosition]==popped[i]){
+                listPosition--;
+                continue;
+            }
+            while(pushPosition<pushed.Length&&pushed[pushPosition]!=popped[i]){
+                listPosition++;
+                popList[listPosition]=pushed[pushPosition];
+                pushPosition++;
+            }
+            if(pushPosition>=pushed.Length) return false;
+            pushPosition++;
+        }
+        return true;
+    }
+}
